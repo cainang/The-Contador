@@ -1,0 +1,118 @@
+#main {
+  background-color: #0e0b16;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#header {
+  color: #fff;
+  padding: 2em;
+  width: 100%;
+  margin-bottom: 2em;
+
+  h1 {
+    font-family: "Anton", sans-serif;
+    letter-spacing: 3px;
+  }
+
+  p {
+    font-family: "Inter", sans-serif;
+    font-style: italic;
+  }
+}
+
+#container {
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 60em;
+
+  margin-bottom: 2em;
+
+  #left {
+    width: 30em;
+    height: 40em;
+    border-radius: 10px;
+    background-image: url("https://www.jacalculei.com.br/wp-content/uploads/2021/06/NOV-IM-55-Dominio-TR-Dominio-sistemas-ajuda-voce-no-periodo-mais-trabalhoso-para-a-contabilidade-1024x640-1.jpg");
+  }
+
+  #right {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-right: 1em;
+
+    h1 {
+      span {
+        font-family: "Anton", sans-serif;
+        letter-spacing: 3px;
+      }
+    }
+
+    p {
+      font-family: "Inter", sans-serif;
+      font-style: italic;
+      font-weight: bold;
+    }
+    #form {
+      margin-top: 4em;
+
+      a {
+        p {
+          font-style: normal;
+          font-size: 11pt;
+        }
+      }
+
+      input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid #a239ca;
+        margin-bottom: 20px;
+        width: 75%;
+      }
+
+      button {
+        background-color: #a239ca;
+        border: none;
+        padding: 5px 10px 5px 10px;
+        border-radius: 5px;
+        color: #fff;
+        transition: 0.5s;
+      }
+
+      button:hover {
+        box-shadow: #0e0b16 1px 1px 8px 0px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+#footer {
+  background-color: #262330;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  gap: 1em;
+  padding: 10px 0px 10px 0px;
+
+  #logo {
+    h1 {
+      font-family: "Anton", sans-serif;
+      letter-spacing: 3px;
+    }
+
+    p {
+      font-family: "Inter", sans-serif;
+      font-style: italic;
+    }
+  }
+}

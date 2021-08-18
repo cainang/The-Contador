@@ -2,31 +2,49 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import Head from "next/head";
 import styles from "../styles/Home.module.scss";
+import React, { FormEvent, useEffect, useState } from "react";
+import firebase from "../lib/firebase";
+import { useRouter } from "next/router";
 import { useAuth } from "../hooks/useAuth";
-import { FormEvent, useEffect, useState } from "react";
-import Image from "next/image";
 
-const Home: NextPage = () => {
-  const { loginNormal, signInWithGoogle } = useAuth();
-
+const Signin: NextPage = () => {
+  const [nome, setNome] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
+
+  const router = useRouter();
+
+  const { signInWithGoogle } = useAuth();
 
   async function handlerSubmit(e: FormEvent) {
     e.preventDefault();
 
     var data = {
+      nome,
       email,
       senha,
     };
 
-    loginNormal(data);
+    try {
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(data.email, data.senha)
+        .then(async () => {
+          await firebase.auth().currentUser?.updateProfile({
+            displayName: data.nome,
+          });
+
+          router.push("/dashboard");
+        });
+    } catch (error) {
+      alert(error);
+    }
   }
 
   return (
     <div id={styles.main}>
       <Head>
-        <title>The Contador</title>
+        <title>The Contador - Signin</title>
       </Head>
 
       <div id={styles.header}>
@@ -40,9 +58,18 @@ const Home: NextPage = () => {
           <h1>
             Bem Vindo ao <span>The Contador</span>
           </h1>
-          <p>Antes de fazer as contas, faça login!</p>
+          <p>Antes de fazer as contas, Cadastre -se!</p>
 
           <form onSubmit={handlerSubmit} id={styles.form}>
+            <p>Nome</p>
+            <input
+              type="text"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setNome(e.target.value);
+              }}
+              name="nome"
+              id="nome"
+            />
             <p>Email</p>
             <input
               type="email"
@@ -87,9 +114,9 @@ const Home: NextPage = () => {
 
             <br />
 
-            <Link href="/signin" passHref>
+            <Link href="/" passHref>
               <a>
-                <p>Você ainda não tem um cadastro? Cadastre-se agora! 😁</p>
+                <p>Você já tem um cadastro? Faça login agora! 😁</p>
               </a>
             </Link>
 
@@ -114,4 +141,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Signin;
